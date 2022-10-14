@@ -44,6 +44,8 @@ function VisualizePlots(props) {
             computed_df = grp.agg(aggregating_parameters)
         }
 
+        computed_df.dropNa({ axis: 1, inplace: true })
+        
         const df_JSON = dfd.toJSON(computed_df);
         df_JSON.map((i) => {
             x.push(i[columnX])
@@ -61,7 +63,7 @@ function VisualizePlots(props) {
         for (var i = 0; i < length; i++) {
             let color = pallete[Math.floor(Math.random() * pallete.length)];
             let label = yAxisParameter[i]
-            if (Unit[columnY[0]] != "") {
+            if (Unit[columnY[0]] != "" && file == "./Automobile_data.csv") {
                 label += " in " + Unit[columnY[i]]
             }
 
